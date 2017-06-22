@@ -55,10 +55,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<SOAnswersResponse> call, Response<SOAnswersResponse> response) {
                 if (response != null){
-                    //Log.e(TAG,""+response.body().getQuotaRemaining());
-                    answersAdapter.updateAnswers(response.body().getItems());
-                }else {
-                    Log.e(TAG,""+response.code());
+                 if (response.isSuccessful()){
+                     answersAdapter.updateAnswers(response.body().getItems());
+                     Log.e(TAG,"response.code() "+response.code());
+                     Log.e(TAG,"response.message() "+response.message());
+                     Log.e(TAG,"response.headers() "+response.headers());
+                 }
                 }
             }
 
